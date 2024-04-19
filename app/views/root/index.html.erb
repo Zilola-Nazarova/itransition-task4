@@ -1,0 +1,10 @@
+<div id="root"></div>
+<%# test if Stimulus is working %>
+<div data-controller="hello"></div>
+
+<%# test if TURBO is working %>
+<%= form_with(url: "/") do |form| %>
+  this is a form for you to submit
+  <%= form.text_field :xyz %>
+  <%= form.submit "submit" %>
+<% end %>

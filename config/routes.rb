@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     end
   end
   # Defines the root path route ("/")
-
-  root 'api/v1/greetings#random_greeting'
+  root 'root#index'
+  # Check if Turbo works
+  post "/", to: "root#index"
+  # Pass route handling to React app
+  get '*path', to: 'root#index'
 end
