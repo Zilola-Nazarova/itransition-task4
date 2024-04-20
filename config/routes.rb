@@ -8,12 +8,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get 'greeting' => 'greetings#random_greeting'
+      get 'user' => 'users#index'
     end
   end
   # Defines the root path route ("/")
   root 'root#index'
-  # Check if Turbo works
-  post "/", to: "root#index"
   # Pass route handling to React app
   get '*path', to: 'root#index'
 end
