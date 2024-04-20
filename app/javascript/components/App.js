@@ -21,6 +21,6 @@ const App = () => {
       <Route path="/counter" element={<Counter />} />
     </Routes>
   );
-}
+};
 
 export default App;

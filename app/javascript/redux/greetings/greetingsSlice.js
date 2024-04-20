@@ -28,15 +28,21 @@ export const greetingsSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(getGreetings.pending, (state) => {
-        state.isLoading = true;
+        const temp = state;
+        temp.isLoading = true;
+        return temp;
       })
       .addCase(getGreetings.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.message = action.payload.message;
+        const temp = state;
+        temp.isLoading = false;
+        temp.message = action.payload.message;
+        return temp;
       })
       .addCase(getGreetings.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload.message;
+        const temp = state;
+        temp.isLoading = false;
+        temp.error = action.payload.message;
+        return temp;
       });
   },
 });

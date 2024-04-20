@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useSelector } from 'react-redux';
 
 const Greeting = () => {
@@ -11,18 +11,16 @@ const Greeting = () => {
   }
   if (error) {
     return (
-      <p className={styles.error}>
+      <p>
         Something went wrong!
         <br />
         { error }
       </p>
     );
   }
-  if (message) {
-    return (
-      <div>{ message }</div>
-    );
-  }
+  return (
+    <div>{ message }</div>
+  );
 };
 
 export default Greeting;

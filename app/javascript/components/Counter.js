@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Counter = () => {
   const [count, setcount] = useState(0);
@@ -8,16 +8,19 @@ const Counter = () => {
 
   return (
     <div className="mt-5 px-3 py-4">
+      <i className="bi bi-award-fill" />
       <h1 className="h1 display-1 mt-5 mb-3">Counter Component</h1>
       <h2 className="h1 display-1 mt-5 mb-3">{count}</h2>
       <div className="mt-5">
         <button
+          type="button"
           className="btn btn-primary btn-lg mx-3 px-5 py-3 mt-2"
           onClick={add}
         >
           Add
         </button>
         <button
+          type="button"
           className="btn btn-primary btn-lg mx-3 px-5 py-3 mt-2"
           onClick={subtract}
         >
