@@ -13,3 +13,5 @@ greeting2 = Greeting.create(message: "This is my second greeting")
 greeting3 = Greeting.create(message: "This is my third greeting")
 greeting4 = Greeting.create(message: "This is my fourth greeting")
 greeting5 = Greeting.create(message: "This is my fifth greeting")
+
+5.times { |i| User.create(name: "User\##{i}") }
