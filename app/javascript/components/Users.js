@@ -25,7 +25,7 @@ const Users = () => {
       </p>
     );
   }
-  return (message && <Table data={message} />);
+  return (message && <Table users={message}/>);
 };
 
 export default Users;
