@@ -11,21 +11,20 @@ const Users = () => {
     dispatch(getUsers());
   }, [dispatch]);
 
-  if (isLoading) {
-    return (
-      <div>Loading......</div>
-    );
-  }
-  if (error) {
-    return (
-      <p>
-        Something went wrong!
-        <br />
-        { error }
-      </p>
-    );
-  }
-  return (message && <Table users={message}/>);
+  return (
+    <>
+      { isLoading && <div>Loading......</div> }
+      { message && <Table users={message} /> }
+      { error
+        && (
+          <p>
+            Something went wrong!
+            <br />
+            { error }
+          </p>
+        )}
+    </>
+  );
 };
 
 export default Users;

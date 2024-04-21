@@ -73,7 +73,7 @@ export const usersSlice = createSlice({
         temp.isLoading = true;
         return temp;
       })
-      .addCase(deleteUsers.fulfilled, (state, action) => {
+      .addCase(deleteUsers.fulfilled, (state) => {
         const temp = state;
         temp.isLoading = false;
         return temp;
@@ -89,7 +89,7 @@ export const usersSlice = createSlice({
         temp.isLoading = true;
         return temp;
       })
-      .addCase(updateUsers.fulfilled, (state, action) => {
+      .addCase(updateUsers.fulfilled, (state) => {
         const temp = state;
         temp.isLoading = false;
         return temp;
