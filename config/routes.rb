@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       delete 'users/delete' => 'users#destroy'
       patch 'users/block' => 'users#block'
       patch 'users/unblock' => 'users#unblock'
+      post 'auth/signin' => 'authentication#signin'
+      post 'auth/signup' => 'authentication#signup'
     end
   end
   # Defines the root path route ("/")
