@@ -14,4 +14,4 @@ greeting3 = Greeting.create(message: "This is my third greeting")
 greeting4 = Greeting.create(message: "This is my fourth greeting")
 greeting5 = Greeting.create(message: "This is my fifth greeting")
 
-5.times { |i| User.create(name: "User\##{i}") }
+5.times { |i| User.create(name: "User\##{i + 1}", email: "user#{i + 1}@mail.ru", password: "user#{i}") };
