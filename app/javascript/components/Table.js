@@ -1,20 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
-import { getUsers, updateUsers, deleteUsers } from '../redux/users/usersSlice';
+import TableData from './TableData';
 
-const Table = ({ users }) => {
-  const dispatch = useDispatch();
-  const deleteUser = async (id) => {
-    await dispatch(deleteUsers(id));
-    dispatch(getUsers());
-  };
-  const toggleStatus = async (id) => {
-    await dispatch(updateUsers(id));
-    dispatch(getUsers());
-  };
-
-  return (
+const Table = () => {
+  return(
     <table>
       <thead>
         <tr>
@@ -26,30 +14,10 @@ const Table = ({ users }) => {
         </tr>
       </thead>
       <tbody>
-        { users.map((user, i) => (
-          <tr key={user.id}>
-            <td>{ i }</td>
-            <td>{ user.id }</td>
-            <td>{ user.name }</td>
-            <td>{ user.blocked ? 'blocked' : 'active' }</td>
-            <td>{ user.last_login }</td>
-            <td>
-              <button type="button" onClick={() => { deleteUser(user.id); }}>
-                Delete
-              </button>
-              <button type="button" onClick={() => { toggleStatus(user.id); }}>
-                { user.blocked ? 'Unblock' : 'Block' }
-              </button>
-            </td>
-          </tr>
-        ))}
+        <TableData />
       </tbody>
     </table>
   );
-};
-
-Table.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Table;
