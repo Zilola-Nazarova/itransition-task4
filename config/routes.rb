@@ -7,8 +7,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      get 'greeting' => 'greetings#random_greeting'
-      resources :users, only: [:index, :destroy, :update]
+      get 'users' => 'users#index'
+      delete 'users/delete' => 'users#destroy'
+      patch 'users/block' => 'users#block'
+      patch 'users/unblock' => 'users#unblock'
     end
   end
   # Defines the root path route ("/")
