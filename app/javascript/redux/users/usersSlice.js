@@ -17,9 +17,9 @@ export const getUsers = createAsyncThunk(
 
 export const deleteUsers = createAsyncThunk(
   'users/deleteUsers',
-  async (id, thunkAPI) => {
+  async (ids, thunkAPI) => {
     try {
-      const resp = await axios.delete(`${USERS_URL}/${id}`, id);
+      const resp = await axios.post(`${USERS_URL}/delete`, ids);
       return resp.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -27,11 +27,23 @@ export const deleteUsers = createAsyncThunk(
   },
 );
 
-export const updateUsers = createAsyncThunk(
-  'users/updateUsers',
-  async (id, thunkAPI) => {
+export const blockUsers = createAsyncThunk(
+  'users/blockUsers',
+  async (ids, thunkAPI) => {
     try {
-      const resp = await axios.patch(`${USERS_URL}/${id}`, id);
+      const resp = await axios.patch(`${USERS_URL}/block`, ids);
+      return resp.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  },
+);
+
+export const unblockUsers = createAsyncThunk(
+  'users/unblockUsers',
+  async (ids, thunkAPI) => {
+    try {
+      const resp = await axios.delete(`${USERS_URL}/unblock`, ids);
       return resp.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -40,7 +52,7 @@ export const updateUsers = createAsyncThunk(
 );
 
 const initialState = {
-  message: '',
+  users: '',
   isLoading: false,
   error: undefined,
 };
@@ -48,7 +60,20 @@ const initialState = {
 export const usersSlice = createSlice({
   name: 'users',
   initialState,
-  reducers: { },
+  reducers: {
+    select: (state, action) => {
+      const temp = state.users.map((user) => {
+        if (user.id == action.payload) {
+          return {
+            ...user,
+            checked: !user.checked,
+          };
+        }
+        return user;
+      });
+      state.users = temp;
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(getUsers.pending, (state) => {
@@ -59,13 +84,16 @@ export const usersSlice = createSlice({
       .addCase(getUsers.fulfilled, (state, action) => {
         const temp = state;
         temp.isLoading = false;
-        temp.message = action.payload;
+        const users = action.payload.map((user) => {
+          return { ...user, checked: false }
+        })
+        temp.users = users;
         return temp;
       })
       .addCase(getUsers.rejected, (state, action) => {
         const temp = state;
         temp.isLoading = false;
-        temp.error = action.payload.message;
+        temp.error = action.payload.users;
         return temp;
       })
       .addCase(deleteUsers.pending, (state) => {
@@ -81,26 +109,43 @@ export const usersSlice = createSlice({
       .addCase(deleteUsers.rejected, (state, action) => {
         const temp = state;
         temp.isLoading = false;
-        temp.error = action.payload.message;
+        temp.error = action.payload.users;
         return temp;
       })
-      .addCase(updateUsers.pending, (state) => {
+      .addCase(blockUsers.pending, (state) => {
         const temp = state;
         temp.isLoading = true;
         return temp;
       })
-      .addCase(updateUsers.fulfilled, (state) => {
+      .addCase(blockUsers.fulfilled, (state) => {
         const temp = state;
         temp.isLoading = false;
         return temp;
       })
-      .addCase(updateUsers.rejected, (state, action) => {
+      .addCase(blockUsers.rejected, (state, action) => {
         const temp = state;
         temp.isLoading = false;
-        temp.error = action.payload.message;
+        temp.error = action.payload.users;
+        return temp;
+      })
+      .addCase(unblockUsers.pending, (state) => {
+        const temp = state;
+        temp.isLoading = true;
+        return temp;
+      })
+      .addCase(unblockUsers.fulfilled, (state) => {
+        const temp = state;
+        temp.isLoading = false;
+        return temp;
+      })
+      .addCase(unblockUsers.rejected, (state, action) => {
+        const temp = state;
+        temp.isLoading = false;
+        temp.error = action.payload.users;
         return temp;
       });
   },
 });
 
+export const { select } = usersSlice.actions;
 export default usersSlice.reducer;
