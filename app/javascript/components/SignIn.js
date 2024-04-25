@@ -27,9 +27,6 @@ const SignIn = () => {
   useEffect(() => {
     if (user && user.token) {
       setAuthMessage(message);
-      dispatch(setToken(user));
-      Cookies.set('token', user.token, { expires: 1, secure: true });
-      Cookies.set('username', user.username, { expires: 1, secure: true });
       navigate("/");
     } else if (isLoading) {
       setAuthMessage("pending");

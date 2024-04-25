@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 
 const AUTH_URL = 'http://127.0.0.1:3000/api/v1/auth';
@@ -60,7 +61,10 @@ export const authSlice = createSlice({
         const temp = state;
         temp.isLoading = false;
         temp.message = action.payload.message;
+        Cookies.set('token', action.payload.token, { expires: 1, secure: true });
+        Cookies.set('username', action.payload.username, { expires: 1, secure: true });
         temp.user = action.payload;
+        temp.user.isAuthenticated = true;
         return temp;
       })
       .addCase(signin.rejected, (state, action) => {
