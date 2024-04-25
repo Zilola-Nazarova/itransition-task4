@@ -1,11 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+import { clearToken } from '../auth/authenticationSlice';
 
 const USERS_URL = 'http://127.0.0.1:3000/api/v1/users';
 
 export const getUsers = createAsyncThunk(
   'users/getUsers',
-  async (token, { rejectWithValue }) => {
+  async (token, { rejectWithValue, dispatch }) => {
     try {
       const resp = await axios.get(USERS_URL, {
         headers: {
@@ -14,6 +16,11 @@ export const getUsers = createAsyncThunk(
       });
       return resp.data;
     } catch (error) {
+      if (error.response.status == 401) {
+        dispatch(clearToken());
+        Cookies.remove('token', { path: '' });
+        Cookies.remove('username', { path: '' });
+      }
       return rejectWithValue(error.response.data);
     }
   },
@@ -31,6 +38,11 @@ export const deleteUsers = createAsyncThunk(
       });
       return resp.data;
     } catch (error) {
+      if (error.response.status == 401) {
+        dispatch(clearToken());
+        Cookies.remove('token', { path: '' });
+        Cookies.remove('username', { path: '' });
+      }
       return rejectWithValue(error.response.data);
     }
   },
@@ -48,6 +60,11 @@ export const blockUsers = createAsyncThunk(
       });
       return resp.data;
     } catch (error) {
+      if (error.response.status == 401) {
+        dispatch(clearToken());
+        Cookies.remove('token', { path: '' });
+        Cookies.remove('username', { path: '' });
+      }
       return rejectWithValue(error.response.data);
     }
   },
@@ -65,6 +82,11 @@ export const unblockUsers = createAsyncThunk(
       });
       return resp.data;
     } catch (error) {
+      if (error.response.status == 401) {
+        dispatch(clearToken());
+        Cookies.remove('token', { path: '' });
+        Cookies.remove('username', { path: '' });
+      }
       return rejectWithValue(error.response.data);
     }
   },
@@ -122,7 +144,6 @@ export const usersSlice = createSlice({
         const temp = state;
         temp.isLoading = false;
         temp.error = action.payload.errors;
-        temp.user = {};
         return temp;
       })
       .addCase(deleteUsers.pending, (state) => {
