@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import { logger } from 'redux-logger';
 import greetingsReducer from './greetings/greetingsSlice';
 import usersReducer from './users/usersSlice';
+import authReducer from './auth/authenticationSlice';
 
 const store = configureStore({
   reducer: {
     greetings: greetingsReducer,
     users: usersReducer,
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
