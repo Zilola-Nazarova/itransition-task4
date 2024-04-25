@@ -1,14 +1,37 @@
 import React from 'react';
-import Table from './Table';
-import Buttons from './Buttons';
+import { useSelector } from 'react-redux';
+import { Outlet, Link } from "react-router-dom";
+import SignOut from './SignOut';
 
-const Users = () => {
-  return(
-    <div class="container-fluid p-5 m-0 bg-dark">
-      <Buttons />
-      <Table /> 
-    </div>
+const Layout = () => {
+  const { user } = useSelector((state) => state.auth);
+
+  return (
+    <>
+      <nav class="bg-dark px-5 py-1">
+        <ul class="d-flex m-0">
+          { user && user.isAuthenticated
+            ?
+            <li>
+              <SignOut /> 
+            </li>
+            :
+            <>
+              <li>
+                <Link class="btn btn-primary m-1 text-light" to="/signin">Sign in</Link>
+              </li>
+              <li>
+                <Link class="btn btn-primary m-1 text-light" to="/signup">Sign up</Link>
+              </li>
+            </>
+          }
+        </ul>
+      </nav>
+      <div  id="wrapper" class="bg-dark text-light border-top p-5 text-center">
+        <Outlet />
+      </div> 
+    </>
   );
 };
 
-export default Users;
+export default Layout;
