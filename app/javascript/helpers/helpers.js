@@ -8,4 +8,8 @@ const getIDs = (users) => {
   return ids;
 };
 
-export default getIDs;
+const generateData = (users, token) => {
+  return { token: token, 'users': {'ids': getIDs(users)} };
+}
+
+export { getIDs, generateData };
