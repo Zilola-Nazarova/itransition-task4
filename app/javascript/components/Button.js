@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 
 const Button = ({children, link}) => {
   return (
-    <Link to={link}>{ children }</ Link>
+    <Link
+      class="btn btn-primary px-3 mx-2"
+      to={link}
+    >{ children }
+    </ Link>
   );
 }
 

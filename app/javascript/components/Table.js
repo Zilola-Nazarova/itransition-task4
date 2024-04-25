@@ -7,10 +7,10 @@ const Table = ({allSelected, onAction}) => {
   const dispatch = useDispatch();
 
   return(
-    <table>
+    <table class="table table-responsive table-dark table-striped-columns table-hover">
       <thead>
         <tr>
-          <th>
+          <th scope="col" class="checkbox">
             <input
               class="form-check-input"
               type="checkbox"
@@ -20,14 +20,14 @@ const Table = ({allSelected, onAction}) => {
               onChange={() => {dispatch(selectAll()); onAction()}}
             />
           </th>
-          <th>#</th>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Status</th>
-          <th>Last seen:</th>
+          <th scope="col">#</th>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Status</th>
+          <th scope="col">Last seen:</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="table-group-divider">
         <TableData />
       </tbody>
     </table>

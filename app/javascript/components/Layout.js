@@ -27,7 +27,7 @@ const Layout = () => {
           }
         </ul>
       </nav>
-      <div  id="wrapper" class="bg-dark text-light border-top p-5 text-center">
+      <div id="wrapper" class="bg-dark text-light border-top p-5 text-center">
         <Outlet />
       </div> 
     </>

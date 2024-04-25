@@ -44,7 +44,7 @@ const SignUp = () => {
         <label htmlFor="email">Email: </label>
         <input name="email" id="email" placeholder="name@example.com" />
         <label htmlFor="password">Password: </label>
-        <input name="password" id="password" value="" />
+        <input name="password" id="password" />
         <button type="submit" disabled={isLoading}>Sign Up</button>
         <p>{authMessage}</p>
       </form>
