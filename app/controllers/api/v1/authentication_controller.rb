@@ -1,4 +1,6 @@
 class Api::V1::AuthenticationController < Api::V1::ApplicationController
+  skip_before_action :authenticate_request
+
   def signup
     @user = User.new(signup_params)
     if @user.save
@@ -9,9 +11,11 @@ class Api::V1::AuthenticationController < Api::V1::ApplicationController
   end
 
   def signin
-    @user = User.find_by_email(signin_params[:email])
+    return unless exists?()
     if @user.valid_password?(signin_params[:password])
-      render json: { message: 'User signed in successfully.', username: @user.name }, status: :ok
+      authenticate()
+      return unless isblocked?()
+      render json: { message: 'User signed in successfully.', username: @user.name, token: @token }, status: :ok
     else
       render json: { errors: "Invalid password" }, status: :unauthorized
     end
@@ -25,5 +29,26 @@ class Api::V1::AuthenticationController < Api::V1::ApplicationController
 
   def signup_params
     params.require(:user).permit(:name, :email, :password)
+  end
+
+  def authenticate
+    @token = jwt_encode(user_id: @user.id)
+    @user.update_attribute(:last_sign_in_at, Time.now)
+  end
+
+  def exists?
+    unless @user = User.find_by_email(signin_params[:email])
+      render json: { errors: "User #{signin_params[:email]} is not registered" }, status: :unauthorized
+      return false
+    end
+    true
+  end
+
+  def isblocked?
+    if @user.blocked
+      render json: { errors: "User #{signin_params[:email]} is blocked" }, status: :unauthorized
+      return false
+    end
+    true
   end
 end
