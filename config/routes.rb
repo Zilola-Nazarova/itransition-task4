@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get 'users' => 'users#index'
-      delete 'users/delete' => 'users#destroy'
+      patch 'users/delete' => 'users#destroy'
       patch 'users/block' => 'users#block'
       patch 'users/unblock' => 'users#unblock'
       post 'auth/signin' => 'authentication#signin'
