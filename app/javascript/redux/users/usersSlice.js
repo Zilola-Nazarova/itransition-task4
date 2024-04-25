@@ -91,6 +91,15 @@ export const usersSlice = createSlice({
         return user;
       });
       state.users = temp;
+    },
+    selectAll: (state) => {
+      const temp = state.users.map((user) => {
+        return {
+          ...user,
+          checked: !user.checked,
+        };
+      });
+      state.users = temp;
     }
   },
   extraReducers(builder) {
