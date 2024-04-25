@@ -5,48 +5,67 @@ const USERS_URL = 'http://127.0.0.1:3000/api/v1/users';
 
 export const getUsers = createAsyncThunk(
   'users/getUsers',
-  async (_, thunkAPI) => {
+  async (token, { rejectWithValue }) => {
     try {
-      const resp = await axios.get(USERS_URL);
+      const resp = await axios.get(USERS_URL, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return resp.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return rejectWithValue(error.response.data);
     }
   },
 );
 
 export const deleteUsers = createAsyncThunk(
   'users/deleteUsers',
-  async (ids, thunkAPI) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const resp = await axios.post(`${USERS_URL}/delete`, ids);
+      const { users, token } = data;
+      const resp = await axios.patch(`${USERS_URL}/delete`, { users }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return resp.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return rejectWithValue(error.response.data);
     }
   },
 );
 
 export const blockUsers = createAsyncThunk(
   'users/blockUsers',
-  async (ids, thunkAPI) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const resp = await axios.patch(`${USERS_URL}/block`, ids);
+      const { users, token } = data;
+      const resp = await axios.patch(`${USERS_URL}/block`, { users }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return resp.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return rejectWithValue(error.response.data);
     }
   },
 );
 
 export const unblockUsers = createAsyncThunk(
   'users/unblockUsers',
-  async (ids, thunkAPI) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const resp = await axios.delete(`${USERS_URL}/unblock`, ids);
+      const { users, token } = data;
+      const resp = await axios.patch(`${USERS_URL}/unblock`, { users }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return resp.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return rejectWithValue(error.response.data);
     }
   },
 );
@@ -93,7 +112,8 @@ export const usersSlice = createSlice({
       .addCase(getUsers.rejected, (state, action) => {
         const temp = state;
         temp.isLoading = false;
-        temp.error = action.payload.users;
+        temp.error = action.payload.errors;
+        temp.user = {};
         return temp;
       })
       .addCase(deleteUsers.pending, (state) => {
@@ -109,7 +129,7 @@ export const usersSlice = createSlice({
       .addCase(deleteUsers.rejected, (state, action) => {
         const temp = state;
         temp.isLoading = false;
-        temp.error = action.payload.users;
+        temp.error = action.payload.errors;
         return temp;
       })
       .addCase(blockUsers.pending, (state) => {
@@ -125,7 +145,7 @@ export const usersSlice = createSlice({
       .addCase(blockUsers.rejected, (state, action) => {
         const temp = state;
         temp.isLoading = false;
-        temp.error = action.payload.users;
+        temp.error = action.payload.errors;
         return temp;
       })
       .addCase(unblockUsers.pending, (state) => {
@@ -141,11 +161,11 @@ export const usersSlice = createSlice({
       .addCase(unblockUsers.rejected, (state, action) => {
         const temp = state;
         temp.isLoading = false;
-        temp.error = action.payload.users;
+        temp.error = action.payload.errors;
         return temp;
       });
   },
 });
 
-export const { select } = usersSlice.actions;
+export const { select, selectAll } = usersSlice.actions;
 export default usersSlice.reducer;
