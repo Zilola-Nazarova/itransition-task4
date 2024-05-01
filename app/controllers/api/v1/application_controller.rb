@@ -8,8 +8,15 @@ class Api::V1::ApplicationController < ActionController::API
     header = request.headers['Authorization']
     header = header.split.last if header
     decoded = jwt_decode(header)
+    find_user(decoded)
+  end
+
+  def find_user
     if User.exists?(decoded[:user_id])
       @current_user = User.find(decoded[:user_id])
+      if @current_user.blocked
+        render json: { errors: "User #{@current_user.email} is blocked" }, status: :unauthorized
+      end
     else
       render json: { errors: "Authentication failed" }, status: :unauthorized
     end
