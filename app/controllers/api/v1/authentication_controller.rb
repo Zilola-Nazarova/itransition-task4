@@ -33,7 +33,7 @@ class Api::V1::AuthenticationController < Api::V1::ApplicationController
 
   def authenticate
     @token = jwt_encode(user_id: @user.id)
-    @user.update_attribute(:last_sign_in_at, Time.now)
+    @user.update_attribute(:last_sign_in, Time.now.utc)
   end
 
   def exists?
