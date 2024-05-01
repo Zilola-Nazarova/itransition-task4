@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 
-const AUTH_URL = 'http://127.0.0.1:3000/api/v1/auth';
+const AUTH_URL = 'https://itransition-task4-qieg.onrender.com/api/v1/auth';
 
 export const signin = createAsyncThunk(
   'auth/signin',

@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { clearToken } from '../auth/authenticationSlice';
 
-const USERS_URL = 'http://127.0.0.1:3000/api/v1/users';
+const USERS_URL = 'https://itransition-task4-qieg.onrender.com/api/v1/users';
 
 export const getUsers = createAsyncThunk(
   'users/getUsers',
