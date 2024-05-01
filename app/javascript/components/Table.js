@@ -7,7 +7,7 @@ const Table = ({allSelected, onAction}) => {
   const dispatch = useDispatch();
 
   return(
-    <table class="table table-responsive table-dark table-striped-columns table-hover">
+    <table class="table table-dark table-striped-columns table-hover m-0">
       <thead>
         <tr>
           <th scope="col" class="checkbox">

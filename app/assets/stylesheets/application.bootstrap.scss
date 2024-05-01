@@ -1,6 +1,10 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 
+* {
+  box-sizing: border-box;
+}
+
 #root {
   min-height: 100vh;
   display: flex;
@@ -11,10 +15,20 @@
   flex: 1;
 }
 
-th.checkbox {
-  width: 5%;
+label, input {
+  display: block;
+  width: 100%;
 }
 
-li {
-  list-style: none;
+input {
+  padding: 4px;
+}
+
+.form-check-input {
+  display: block;
+  margin: 4px auto;
+}
+
+#signin-form {
+  max-width: 600px;
 }

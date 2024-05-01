@@ -38,16 +38,26 @@ const SignIn = () => {
   return (
     <div>
       <h1>Sign In</h1>
-      <form onSubmit={(e) => sendForm(e)} ref={formRef} id="signin-form">
+      <form
+        class="mx-auto my-4 w-75 py-3 px-5 bg-dark text-light border border-secondary rounded-4 d-grid gap-1"
+        onSubmit={(e) => sendForm(e)}
+        ref={formRef}
+        id="signin-form"
+      >
         <label htmlFor="email">Email: </label>
         <input name="email" id="email" placeholder="name@example.com" />
         <label htmlFor="password">Password: </label>
-        <input name="password" id="password"/>
-        <button type="submit">Sign In</button>
+        <input type="password" name="password" id="password"/>
+        <button
+          class="btn btn-primary px-3 mt-4"
+          type="submit"
+        >
+          Sign In
+        </button>
         <p>{authMessage}</p>
       </form>
-      <p>Don't have an account yet?</p>
-      <Button link="/signup">Sign Up</Button>
+      <p class="m-1">Don't have an account yet?</p>
+      <Button link="/signup" style="secondary">Sign Up</Button>
     </div>
   );
 }

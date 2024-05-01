@@ -13,9 +13,14 @@ const ProtectedLayout = () => {
       {user && user.isAuthenticated
       ? (
           <>
-            <Actions onAction={() => setAllSelected(false)}/>
-            <Table onAction={() => setAllSelected((prev) => !prev)} allSelected={allSelected}/>
-          </>   
+          <h1>Users' Data:</h1>
+            <div
+              class="my-4 p-3 bg-secondary border-top rounded-top-3"
+            >
+              <Actions onAction={() => setAllSelected(false)}/>
+              <Table onAction={() => setAllSelected((prev) => !prev)} allSelected={allSelected}/>
+            </div> 
+          </>
         )   
       : <Authenticate />
       }

@@ -25,7 +25,7 @@ const TableData = () => {
       { users
       && users.map((user, i) => (
           <tr key={user.id}>
-            <td class="">
+            <th scope="row" class="checkbox">
               <input
                 class="form-check-input"
                 type="checkbox"
@@ -34,10 +34,8 @@ const TableData = () => {
                 checked={user.checked}
                 onChange={() => dispatch(select(user.id)) }
               />
-            </td>
-            <td>
-              <label class="form-check-label" for={user.id}>{ i + 1 }</label>
-            </td>
+            </th>
+            <td>{ i + 1 }</td>
             <td>{ user.id }</td>
             <td>{ user.name}</td>
             <td>{ user.blocked ? 'blocked' : 'active' }</td>

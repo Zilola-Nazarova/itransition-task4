@@ -17,14 +17,14 @@ const Actions = ({onAction}) => {
   };
 
   return (
-    <div class="d-sm-flex">
-      <Action onClick={(e) => handleAction(blockUsers, e)}>
+    <div class="d-sm-flex pb-2">
+      <Action onClick={(e) => handleAction(blockUsers, e)} style="light">
         <i class="bi bi-lock"></i>Block
       </Action>
-      <Action onClick={(e) => handleAction(unblockUsers, e)}>
+      <Action onClick={(e) => handleAction(unblockUsers, e)} style="light">
         <i class="bi bi-unlock"></i>
       </Action>
-      <Action onClick={(e) => handleAction(deleteUsers, e)}>
+      <Action onClick={(e) => handleAction(deleteUsers, e)} style="danger">
         <i class="bi bi-trash"></i>
       </Action>
     </div>

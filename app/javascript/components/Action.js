@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Action = ({children, onClick}) => {
+const Action = ({children, onClick, style}) => {
   return (
     <button
       type="button"
-      class="btn btn-primary m-1"
+      class={`btn btn-${style} m-1`}
       onClick={onClick}
     >
       {children}
