@@ -11,13 +11,15 @@ class Api::V1::AuthenticationController < Api::V1::ApplicationController
   end
 
   def signin
-    return unless exists?()
+    return unless exists?
+
     if @user.valid_password?(signin_params[:password])
-      authenticate()
-      return unless isblocked?()
+      authenticate
+      return unless isblocked?
+
       render json: { message: 'User signed in successfully.', username: @user.name, token: @token }, status: :ok
     else
-      render json: { errors: "Invalid password" }, status: :unauthorized
+      render json: { errors: 'Invalid password' }, status: :unauthorized
     end
   end
 
@@ -37,7 +39,7 @@ class Api::V1::AuthenticationController < Api::V1::ApplicationController
   end
 
   def exists?
-    unless @user = User.find_by_email(signin_params[:email])
+    unless (@user = User.find_by_email(signin_params[:email]))
       render json: { errors: "User #{signin_params[:email]} is not registered" }, status: :unauthorized
       return false
     end

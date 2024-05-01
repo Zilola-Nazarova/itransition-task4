@@ -14,11 +14,9 @@ class Api::V1::ApplicationController < ActionController::API
   def find_user(decoded)
     if User.exists?(decoded[:user_id])
       @current_user = User.find(decoded[:user_id])
-      if @current_user.blocked
-        render json: { errors: "User #{@current_user.email} is blocked" }, status: :unauthorized
-      end
+      render json: { errors: "User #{@current_user.email} is blocked" }, status: :unauthorized if @current_user.blocked
     else
-      render json: { errors: "Authentication failed" }, status: :unauthorized
+      render json: { errors: 'Authentication failed' }, status: :unauthorized
     end
   end
 end
