@@ -23,7 +23,7 @@ const TableData = () => {
         </tr>
       }
       { users
-      && users.map((user, i) => (
+      && users.map((user) => (
           <tr key={user.id}>
             <th scope="row" class="checkbox">
               <input
@@ -35,11 +35,12 @@ const TableData = () => {
                 onChange={() => dispatch(select(user.id)) }
               />
             </th>
-            <td>{ i + 1 }</td>
             <td>{ user.id }</td>
             <td>{ user.name}</td>
+            <td>{ user.email}</td>
+            <td>{ new Date(user.created_at).toDateString() }</td>
+            <td>{ new Date(user.last_sign_in).toDateString() }</td>
             <td>{ user.blocked ? 'blocked' : 'active' }</td>
-            <td>{ user.last_sign_in_at }</td>
           </tr>
         ))
       }
