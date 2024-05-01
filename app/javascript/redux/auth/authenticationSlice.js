@@ -40,14 +40,18 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setToken: (state, action) => {
-      state.user.username = action.payload.username;
-      state.user.token = action.payload.token;
-      state.user.isAuthenticated = !!action.payload;
+      const temp = state;
+      temp.user.username = action.payload.username;
+      temp.user.token = action.payload.token;
+      temp.user.isAuthenticated = !!action.payload;
+      return temp;
     },
     clearToken: (state) => {
-      state.user.username = null;
-      state.user.token = null;
-      state.user.isAuthenticated = false;
+      const temp = state;
+      temp.user.username = null;
+      temp.user.token = null;
+      temp.user.isAuthenticated = false;
+      return temp;
     },
   },
   extraReducers(builder) {

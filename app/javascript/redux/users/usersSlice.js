@@ -16,7 +16,7 @@ export const getUsers = createAsyncThunk(
       });
       return resp.data;
     } catch (error) {
-      if (error.response.status == 401) {
+      if (error.response.status === 401) {
         dispatch(clearToken());
         Cookies.remove('token', { path: '' });
         Cookies.remove('username', { path: '' });
@@ -28,7 +28,7 @@ export const getUsers = createAsyncThunk(
 
 export const deleteUsers = createAsyncThunk(
   'users/deleteUsers',
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const { users, token } = data;
       const resp = await axios.patch(`${USERS_URL}/delete`, { users }, {
@@ -38,7 +38,7 @@ export const deleteUsers = createAsyncThunk(
       });
       return resp.data;
     } catch (error) {
-      if (error.response.status == 401) {
+      if (error.response.status === 401) {
         dispatch(clearToken());
         Cookies.remove('token', { path: '' });
         Cookies.remove('username', { path: '' });
@@ -50,7 +50,7 @@ export const deleteUsers = createAsyncThunk(
 
 export const blockUsers = createAsyncThunk(
   'users/blockUsers',
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const { users, token } = data;
       const resp = await axios.patch(`${USERS_URL}/block`, { users }, {
@@ -60,7 +60,7 @@ export const blockUsers = createAsyncThunk(
       });
       return resp.data;
     } catch (error) {
-      if (error.response.status == 401) {
+      if (error.response.status === 401) {
         dispatch(clearToken());
         Cookies.remove('token', { path: '' });
         Cookies.remove('username', { path: '' });
@@ -72,7 +72,7 @@ export const blockUsers = createAsyncThunk(
 
 export const unblockUsers = createAsyncThunk(
   'users/unblockUsers',
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const { users, token } = data;
       const resp = await axios.patch(`${USERS_URL}/unblock`, { users }, {
@@ -82,7 +82,7 @@ export const unblockUsers = createAsyncThunk(
       });
       return resp.data;
     } catch (error) {
-      if (error.response.status == 401) {
+      if (error.response.status === 401) {
         dispatch(clearToken());
         Cookies.remove('token', { path: '' });
         Cookies.remove('username', { path: '' });
@@ -103,8 +103,9 @@ export const usersSlice = createSlice({
   initialState,
   reducers: {
     select: (state, action) => {
-      const temp = state.users.map((user) => {
-        if (user.id == action.payload) {
+      const temp = state;
+      temp.users = temp.users.map((user) => {
+        if (user.id === action.payload) {
           return {
             ...user,
             checked: !user.checked,
@@ -112,17 +113,16 @@ export const usersSlice = createSlice({
         }
         return user;
       });
-      state.users = temp;
+      return temp;
     },
     selectAll: (state) => {
-      const temp = state.users.map((user) => {
-        return {
-          ...user,
-          checked: !user.checked,
-        };
-      });
-      state.users = temp;
-    }
+      const temp = state;
+      temp.users = temp.users.map((user) => ({
+        ...user,
+        checked: !user.checked,
+      }));
+      return temp;
+    },
   },
   extraReducers(builder) {
     builder
@@ -135,9 +135,10 @@ export const usersSlice = createSlice({
         const temp = state;
         temp.isLoading = false;
         temp.error = undefined;
-        const users = action.payload.map((user) => {
-          return { ...user, checked: false }
-        })
+        const users = action.payload.map((user) => ({
+          ...user,
+          checked: false,
+        }));
         temp.users = users;
         return temp;
       })

@@ -1,23 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import TableData from './TableData';
 import { selectAll } from '../redux/users/usersSlice';
 
-const Table = ({allSelected, onAction}) => {
+const Table = ({ allSelected, onAction }) => {
   const dispatch = useDispatch();
 
-  return(
-    <table class="table table-dark table-striped-columns table-hover m-0 align-middle">
-      <thead class="align-middle">
+  return (
+    <table className="table table-dark table-striped-columns table-hover m-0 align-middle">
+      <thead className="align-middle">
         <tr>
-          <th scope="col" class="checkbox">
+          <th scope="col">
             <input
-              class="form-check-input"
+              className="checkbox"
+              aria-label="Mute volume"
               type="checkbox"
               id="all"
               name="all"
               checked={allSelected}
-              onChange={() => {dispatch(selectAll()); onAction()}}
+              onChange={() => { dispatch(selectAll()); onAction(); }}
             />
           </th>
           <th scope="col">ID</th>
@@ -28,11 +30,16 @@ const Table = ({allSelected, onAction}) => {
           <th scope="col">Status</th>
         </tr>
       </thead>
-      <tbody class="table-group-divider">
+      <tbody className="table-group-divider">
         <TableData />
       </tbody>
     </table>
   );
+};
+
+Table.propTypes = {
+  allSelected: PropTypes.bool.isRequired,
+  onAction: PropTypes.func.isRequired,
 };
 
 export default Table;
