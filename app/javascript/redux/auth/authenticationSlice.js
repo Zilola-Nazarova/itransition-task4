@@ -59,16 +59,18 @@ export const authSlice = createSlice({
       })
       .addCase(signin.fulfilled, (state, action) => {
         const temp = state;
+        temp.error = undefined;
         temp.isLoading = false;
+        temp.user = action.payload;
         temp.message = action.payload.message;
+        temp.user.isAuthenticated = true;
         Cookies.set('token', action.payload.token, { expires: 1, secure: true });
         Cookies.set('username', action.payload.username, { expires: 1, secure: true });
-        temp.user = action.payload;
-        temp.user.isAuthenticated = true;
         return temp;
       })
       .addCase(signin.rejected, (state, action) => {
         const temp = state;
+        temp.user = {};
         temp.isLoading = false;
         temp.error = action.payload.errors;
         return temp;
@@ -80,6 +82,7 @@ export const authSlice = createSlice({
       })
       .addCase(signup.fulfilled, (state, action) => {
         const temp = state;
+        temp.error = undefined;
         temp.isLoading = false;
         temp.message = action.payload.message;
         return temp;

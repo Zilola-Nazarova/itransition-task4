@@ -134,6 +134,7 @@ export const usersSlice = createSlice({
       .addCase(getUsers.fulfilled, (state, action) => {
         const temp = state;
         temp.isLoading = false;
+        temp.error = undefined;
         const users = action.payload.map((user) => {
           return { ...user, checked: false }
         })
@@ -153,6 +154,7 @@ export const usersSlice = createSlice({
       })
       .addCase(deleteUsers.fulfilled, (state) => {
         const temp = state;
+        temp.error = undefined;
         temp.isLoading = false;
         return temp;
       })
@@ -169,6 +171,7 @@ export const usersSlice = createSlice({
       })
       .addCase(blockUsers.fulfilled, (state) => {
         const temp = state;
+        temp.error = undefined;
         temp.isLoading = false;
         return temp;
       })
@@ -185,6 +188,7 @@ export const usersSlice = createSlice({
       })
       .addCase(unblockUsers.fulfilled, (state) => {
         const temp = state;
+        temp.error = undefined;
         temp.isLoading = false;
         return temp;
       })
