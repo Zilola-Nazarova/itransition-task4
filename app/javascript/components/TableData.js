@@ -39,7 +39,7 @@ const TableData = () => {
             <td>{ user.name}</td>
             <td>{ user.email}</td>
             <td>{ new Date(user.created_at).toDateString() }</td>
-            <td>{ new Date(user.last_sign_in).toDateString() }</td>
+            <td>{ user.last_sign_in ? 'N/A' : new Date(user.last_sign_in).toDateString() }</td>
             <td>{ user.blocked ? 'blocked' : 'active' }</td>
           </tr>
         ))

@@ -11,7 +11,7 @@ class Api::V1::ApplicationController < ActionController::API
     find_user(decoded)
   end
 
-  def find_user
+  def find_user(decoded)
     if User.exists?(decoded[:user_id])
       @current_user = User.find(decoded[:user_id])
       if @current_user.blocked
