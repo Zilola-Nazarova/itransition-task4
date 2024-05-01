@@ -8,4 +8,4 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-5.times { |i| User.create(name: "User\##{i + 1}", email: "user#{i + 1}@mail.ru", password: "user#{i + 1}") };
+25.times { |i| User.create(name: "User\##{i + 1}", email: "user#{i + 1}@mail.ru", password: "user#{i + 1}") };

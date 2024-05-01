@@ -15,18 +15,18 @@
   flex: 1;
 }
 
-label, input {
+form label, form input {
   display: block;
   width: 100%;
 }
 
-input {
+form input {
   padding: 4px;
 }
 
 .form-check-input {
   display: block;
-  margin: 4px auto;
+  margin: auto;
 }
 
 #signin-form {

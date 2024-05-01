@@ -15,7 +15,7 @@ const ProtectedLayout = () => {
           <>
           <h1>Users' Data:</h1>
             <div
-              class="my-4 p-3 bg-secondary border-top rounded-top-3"
+              class="my-4 p-3 bg-secondary border-top rounded-top-3 table-responsive-md"
             >
               <Actions onAction={() => setAllSelected(false)}/>
               <Table onAction={() => setAllSelected((prev) => !prev)} allSelected={allSelected}/>
