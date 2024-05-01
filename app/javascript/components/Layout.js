@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -17,21 +17,20 @@ const Layout = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto my-2 my-lg-0">
               { user && user.isAuthenticated
-                ?
-                  <SignOut /> 
-                :
-                <>
-                  <Link class="btn btn-primary m-1 text-light" to="/signin">Sign in</Link>
-                  <Link class="btn btn-primary m-1 text-light" to="/signup">Sign up</Link>
-                </>
-              }
+                ? <SignOut />
+                : (
+                  <>
+                    <Link class="btn btn-primary m-1 text-light" to="/signin">Sign in</Link>
+                    <Link class="btn btn-primary m-1 text-light" to="/signup">Sign up</Link>
+                  </>
+                )}
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div id="wrapper" class="bg-light border-top p-5 text-center">
+      <div id="wrapper" className="bg-light border-top p-5 text-center">
         <Outlet />
-      </div> 
+      </div>
     </>
   );
 };

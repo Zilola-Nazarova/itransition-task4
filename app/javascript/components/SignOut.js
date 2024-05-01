@@ -15,7 +15,7 @@ const SignOut = () => {
   };
 
   return (
-    <button class="btn btn-primary m-1" onClick={() => signout()}>Sign Out</button>
+    <button type="button" className="btn btn-primary m-1" onClick={() => signout()}>Sign Out</button>
   );
 };
 

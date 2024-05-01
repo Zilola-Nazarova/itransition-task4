@@ -19,7 +19,7 @@ const App = () => {
     dispatch(clearToken());
   }
 
-  return(
+  return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="signin" element={<SignIn />} />
@@ -28,7 +28,7 @@ const App = () => {
       </Route>
       <Route path="*" element={<NoPage />} />
     </Routes>
-  )
+  );
 };
 
 export default App;
