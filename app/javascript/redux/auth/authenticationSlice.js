@@ -48,6 +48,7 @@ export const authSlice = createSlice({
     },
     clearToken: (state) => {
       const temp = state;
+      temp.message = null;
       temp.user.username = null;
       temp.user.token = null;
       temp.user.isAuthenticated = false;
