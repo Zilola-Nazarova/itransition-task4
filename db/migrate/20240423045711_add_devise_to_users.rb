@@ -9,7 +9,6 @@ class AddDeviseToUsers < ActiveRecord::Migration[7.1]
     end
 
     add_index :users, :email,                unique: true
-      unique: true
   end
 
   def self.down
