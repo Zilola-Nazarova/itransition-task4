@@ -129,6 +129,7 @@ export const usersSlice = createSlice({
       .addCase(getUsers.pending, (state) => {
         const temp = state;
         temp.isLoading = true;
+        temp.users = null;
         return temp;
       })
       .addCase(getUsers.fulfilled, (state, action) => {

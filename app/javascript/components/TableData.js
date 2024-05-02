@@ -12,11 +12,11 @@ const TableData = () => {
 
   return (
     <>
-      { isLoading && <tr><td colSpan="6">Loading......</td></tr> }
+      { isLoading && <tr><td colSpan="7">Loading......</td></tr> }
       { error
         && (
         <tr>
-          <td colSpan="6">
+          <td colSpan="7">
             Something went wrong!
             <br />
             { error }

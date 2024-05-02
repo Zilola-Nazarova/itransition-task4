@@ -11,7 +11,7 @@ const Layout = () => {
 
   return (
     <>
-      <Navbar sticky="top" expand="lg" className="bg-dark px-5">
+      <Navbar sticky="top" expand="lg" className="bg-dark px-5 border-bottom border-secondary">
         <Container fluid className="px-0">
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="bg-light" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -28,7 +28,7 @@ const Layout = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div id="wrapper" className="bg-light border-top p-5 text-center">
+      <div id="wrapper" className="bg-light p-5 text-center">
         <Outlet />
       </div>
     </>
