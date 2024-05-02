@@ -53,7 +53,7 @@ const SignUp = () => {
       <Form
         noValidate
         validated={validated}
-        className="mx-auto my-4 w-75 py-3 px-5 bg-dark text-light border border-secondary rounded-4 d-grid gap-1"
+        className="mx-auto my-4 w-75 p-5 bg-dark text-light border border-secondary rounded-4 d-grid gap-1"
         onSubmit={(e) => sendForm(e)}
         ref={formRef}
         id="signin-form"

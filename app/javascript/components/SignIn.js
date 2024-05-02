@@ -39,12 +39,12 @@ const SignIn = () => {
   };
   useEffect(() => {
     if (user && user.token) {
-      setAuthMessage(<p className="text-success">{message}</p>);
+      setAuthMessage(<p className="text-success my-0">{message}</p>);
       navigate('/');
     } else if (isLoading) {
-      setAuthMessage(<p>Signing in ...</p>);
+      setAuthMessage(<p className="text-secondary my-0">Signing in ...</p>);
     } else if (error) {
-      setAuthMessage(<p className="text-danger">{error}</p>);
+      setAuthMessage(<p className="text-danger my-0">{error}</p>);
     }
   }, [isLoading, error, user, message, navigate]);
   useEffect(() => {
@@ -57,7 +57,7 @@ const SignIn = () => {
       <Form
         noValidate
         validated={validated}
-        className="mx-auto my-4 w-75 py-3 px-5 bg-dark text-light border border-secondary rounded-4 d-grid gap-1"
+        className="mx-auto my-4 w-75 p-5 bg-dark text-light border border-secondary rounded-4 d-grid gap-1"
         onSubmit={(e) => sendForm(e)}
         ref={formRef}
         id="signin-form"
